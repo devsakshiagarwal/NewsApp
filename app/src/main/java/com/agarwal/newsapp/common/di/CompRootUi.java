@@ -27,7 +27,7 @@ public class CompRootUi {
     return new Router(getActivity());
   }
 
-  private NewsListingApi getNewsListingApi() {
+  public NewsListingApi getNewsListingApi() {
     return compRoot.getNewsListingApi();
   }
 }
