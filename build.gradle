@@ -1,0 +1,38 @@
+buildscript {
+
+  ext {
+    compileSdkVersion = 28
+    minSdkVersion = 19
+    targetSdkVersion = 28
+    buildToolsVersion = '3.3.1'
+    appcompatVersion = "1.0.2"
+    materialVersion = "1.1.0-alpha04"
+    constraintLayoutVersion = "2.0.0-alpha3"
+    cardviewVersion = "1.0.0"
+    retrofitVersion = "2.5.0"
+    gsonVersion = "2.3.0"
+    glideVersion = "4.7.1"
+    butterknife = "10.0.0"
+  }
+
+  repositories {
+    google()
+    jcenter()
+  }
+
+  dependencies {
+    classpath "com.android.tools.build:gradle:$buildToolsVersion"
+  }
+}
+
+allprojects {
+  repositories {
+    google()
+    jcenter()
+    maven { url "https://jitpack.io" }
+  }
+}
+
+task clean(type: Delete) {
+  delete rootProject.buildDir
+}

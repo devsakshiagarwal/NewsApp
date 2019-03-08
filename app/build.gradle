@@ -1,0 +1,63 @@
+apply plugin: 'com.android.application'
+
+android {
+
+  lintOptions {
+    abortOnError true
+    ignoreWarnings false
+    warningsAsErrors true
+    lintConfig file("$project.rootDir/configs/lint_config.xml")
+  }
+
+  compileSdkVersion rootProject.compileSdkVersion
+
+  defaultConfig {
+    applicationId "com.agarwal.newsapp"
+    minSdkVersion rootProject.minSdkVersion
+    targetSdkVersion rootProject.targetSdkVersion
+
+    versionCode 1
+    versionName "1.0"
+
+    resConfigs "en"
+    vectorDrawables.useSupportLibrary = true
+
+    testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+  }
+  buildTypes {
+    release {
+      minifyEnabled true
+      shrinkResources true
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+    debug {
+      applicationIdSuffix ".debug"
+      proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    }
+  }
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_1_8
+    targetCompatibility JavaVersion.VERSION_1_8
+  }
+}
+
+dependencies {
+  implementation fileTree(include: ['*.jar'], dir: 'libs')
+
+  //Material Design and UI
+  implementation "com.google.android.material:material:$rootProject.materialVersion"
+  implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+  implementation "androidx.cardview:cardview:$rootProject.cardviewVersion"
+  implementation 'androidx.recyclerview:recyclerview:1.0.0'
+
+  //Butter knife
+  implementation "com.jakewharton:butterknife:$rootProject.butterknife"
+  annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknife"
+
+  //Network
+  implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+  implementation "com.squareup.retrofit2:converter-gson:$rootProject.gsonVersion"
+
+  //Glide
+  implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+}
