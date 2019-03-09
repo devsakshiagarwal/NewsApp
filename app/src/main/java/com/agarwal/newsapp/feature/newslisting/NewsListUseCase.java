@@ -25,7 +25,15 @@ public class NewsListUseCase extends BaseObservable<NewsListUseCase.Listener> {
     newsListingApi.getNewsList(getQueryMap(query)).enqueue(new Callback<NewsListSchema>() {
       @Override
       public void onResponse(Call<NewsListSchema> call, Response<NewsListSchema> response) {
-        onSuccess(response.body().getArticles());
+        if (response.isSuccessful()) {
+          if (response.body().getStatus().equalsIgnoreCase("ok")) {
+            onSuccess(response.body().getArticles());
+          } else {
+            onFail(response.body().getMessage());
+          }
+        } else {
+          onFail("Something went wrong");
+        }
       }
 
       @Override public void onFailure(Call<NewsListSchema> call, Throwable t) {
@@ -38,7 +46,15 @@ public class NewsListUseCase extends BaseObservable<NewsListUseCase.Listener> {
     newsListingApi.getHeadLines(getQueryMap(query)).enqueue(new Callback<NewsListSchema>() {
       @Override
       public void onResponse(Call<NewsListSchema> call, Response<NewsListSchema> response) {
-        onSuccess(response.body().getArticles());
+        if (response.isSuccessful()) {
+          if (response.body().getStatus().equalsIgnoreCase("ok")) {
+            onSuccess(response.body().getArticles());
+          } else {
+            onFail(response.body().getMessage());
+          }
+        } else {
+          onFail("Something went wrong");
+        }
       }
 
       @Override public void onFailure(Call<NewsListSchema> call, Throwable t) {

@@ -15,6 +15,6 @@ public interface NewsListingView extends ObservableView<NewsListingView.Listener
   void bindNewsList(List<Articles> newsList);
 
   public interface Listener {
-
+    void onQueryChange(String query);
   }
 }

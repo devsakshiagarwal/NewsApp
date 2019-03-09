@@ -12,11 +12,31 @@
   <include
       layout="@layout/layout_toolbar_search"/>
 
+  <ProgressBar
+      android:id="@+id/pb_news"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:layout_margin="@dimen/margin_16"
+      android:visibility="gone"
+      />
+
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/rv_news_list"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/margin_8"
+      />
+
+  <androidx.appcompat.widget.AppCompatTextView
+      android:id="@+id/tv_error"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center"
+      android:fontFamily="@font/exo2_regular"
+      android:textAlignment="center"
+      android:textColor="@color/color4c"
+      android:visibility="gone"
       />
 
 </LinearLayout>

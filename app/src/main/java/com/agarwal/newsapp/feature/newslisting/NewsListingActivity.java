@@ -29,8 +29,8 @@ public class NewsListingActivity extends BaseActivity
 
   @Override protected void onResume() {
     super.onResume();
-    newsListUseCase.fetchEverything(query);
     newsListingView.showProgressBar();
+    makeApiCall();
   }
 
   @Override public void onSuccess(List<Articles> newsArticles) {
@@ -47,5 +47,14 @@ public class NewsListingActivity extends BaseActivity
     super.onStop();
     newsListingView.unregisterListener(this);
     newsListUseCase.unregisterListener(this);
+  }
+
+  @Override public void onQueryChange(String query) {
+    this.query = query;
+    makeApiCall();
+  }
+
+  void makeApiCall() {
+    newsListUseCase.fetchEverything(query);
   }
 }

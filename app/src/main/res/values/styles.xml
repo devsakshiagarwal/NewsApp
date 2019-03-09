@@ -2,10 +2,23 @@
 
   <!-- Base application theme. -->
   <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-    <!-- Customize your theme here. -->
     <item name="colorPrimary">@color/colorPrimary</item>
     <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
     <item name="colorAccent">@color/colorAccent</item>
+    <item name="android:textColorHint">@color/color4Dff</item>
+    <item name="android:editTextColor">@android:color/white</item>
+    <item name="android:textColorSecondary">@color/color4Dff</item>
+
   </style>
 
+  <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
+    <item name="android:background">@color/colorPrimary</item>
+    <item name="android:windowFullscreen">true</item>
+    <item name="android:editTextColor">@android:color/white</item>
+  </style>
+
+  <style name="ToolbarWhiteAccentTheme" parent="Widget.AppCompat.SearchView">
+    <item name="closeIcon">@drawable/ic_close_white</item>
+
+  </style>
 </resources>

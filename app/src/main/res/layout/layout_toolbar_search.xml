@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/height_toolbar"
     app:contentInsetStartWithNavigation="-16dp"
-    android:background="@color/colorPrimary"
+    style="@style/ToolbarTheme"
     >
 
   <androidx.appcompat.widget.SearchView
@@ -13,5 +13,6 @@
       android:layout_height="match_parent"
       app:queryHint="@string/search_hint"
       app:searchHintIcon="@null"
+      style="@style/ToolbarWhiteAccentTheme"
       />
 </androidx.appcompat.widget.Toolbar>
