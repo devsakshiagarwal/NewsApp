@@ -60,7 +60,7 @@ public class RealNewsListingView extends BaseObservableView<NewsListingView.List
   }
 
   private void setUpSearchView() {
-    searchCloseBtn.setClickable(false);
+    searchCloseBtn.setVisibility(View.GONE);
     searchView.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
     searchView.setIconified(false);
     searchView.setOnQueryTextListener(
@@ -75,9 +75,9 @@ public class RealNewsListingView extends BaseObservableView<NewsListingView.List
           @Override
           public boolean onQueryTextChange(String newText) {
             if (newText.length() == 0) {
-              searchCloseBtn.setClickable(false);
+              searchCloseBtn.setVisibility(View.GONE);
             } else {
-              searchCloseBtn.setClickable(true);
+              searchCloseBtn.setVisibility(View.VISIBLE);
             }
             timer.cancel();
             timer = new Timer();

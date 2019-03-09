@@ -35,6 +35,7 @@
         android:layout_marginTop="@dimen/margin_8"
         android:layout_toEndOf="@id/iv_news"
         android:ellipsize="end"
+        android:maxLines="3"
         android:fontFamily="@font/exo2_bold"
         android:textColor="@color/color4c"
         android:textSize="@dimen/text_14"
@@ -47,8 +48,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/tv_title"
-        android:layout_marginEnd="@dimen/margin_8"
-        android:layout_marginTop="@dimen/margin_8"
+        android:padding="@dimen/margin_8"
+        android:layout_marginStart="@dimen/height_image"
         android:fontFamily="@font/exo2_italic"
         android:textColor="@color/color91"
         android:textSize="@dimen/text_10"
@@ -64,7 +65,6 @@
         android:fontFamily="@font/exo2_regular"
         android:textColor="@color/color4c"
         android:textSize="@dimen/text_12"
-        app:layout_constraintHorizontal_bias="0.0"
         />
 
   </RelativeLayout>
