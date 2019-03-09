@@ -10,7 +10,7 @@ public class NewsApp extends Application {
   @Override
   public void onCreate() {
     super.onCreate();
-    compRoot = new CompRoot(this);
+    compRoot = new CompRoot();
   }
 
   public CompRoot getCompRoot() {

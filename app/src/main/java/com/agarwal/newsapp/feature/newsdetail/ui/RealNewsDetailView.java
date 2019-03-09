@@ -1,5 +1,6 @@
 package com.agarwal.newsapp.feature.newsdetail.ui;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
@@ -15,6 +16,7 @@ public class RealNewsDetailView extends BaseObservableView<NewsDetailView.Listen
   @BindView(R.id.pb_news_detail) ProgressBar pbNewsDetail;
   @BindView(R.id.wv_news_detail) WebView wvNewsDetail;
 
+  @SuppressLint("InflateParams")
   public RealNewsDetailView(LayoutInflater inflater) {
     setRootView(inflater.inflate(R.layout.activity_news_detail, null, false));
     pbNewsDetail.setVisibility(View.VISIBLE);

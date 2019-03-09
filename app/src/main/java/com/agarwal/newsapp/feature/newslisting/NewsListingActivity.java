@@ -53,7 +53,7 @@ public class NewsListingActivity extends BaseActivity
     makeApiCall();
   }
 
-  @Override public void onClick(String url, String title) {
+  @Override public void onClick(String url) {
     Bundle bundle = new Bundle();
     bundle.putString(AppConstants.PARAM_URL, url);
     getCompositionRoot().getRouter().toNewsDetailActivity(bundle);

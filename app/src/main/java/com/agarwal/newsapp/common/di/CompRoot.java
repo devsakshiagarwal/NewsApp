@@ -1,7 +1,5 @@
 package com.agarwal.newsapp.common.di;
 
-import com.agarwal.newsapp.NewsApp;
-import com.agarwal.newsapp.common.connectivity.ConnectivityDetector;
 import com.agarwal.newsapp.feature.newslisting.network.NewsListingApi;
 import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
@@ -11,28 +9,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.agarwal.newsapp.Configuration.BASE_URL;
 
 public class CompRoot {
-  private final NewsApp newsApp;
   private Retrofit retrofit;
-  private ConnectivityDetector connectivityDetector;
+  private static final int TIMEOUT = 30;
 
-  public CompRoot(NewsApp newsApp) {
-    this.newsApp = newsApp;
-    getNetworkManager();
-  }
-
-  public final ConnectivityDetector getNetworkManager() {
-    if (connectivityDetector == null) {
-      connectivityDetector = new ConnectivityDetector(newsApp);
-    }
-    return connectivityDetector;
+  public CompRoot() {
   }
 
   private Retrofit getRetrofit() {
     if (retrofit == null) {
       OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
-      httpBuilder.connectTimeout(30, TimeUnit.SECONDS);
-      httpBuilder.readTimeout(30, TimeUnit.SECONDS);
-      httpBuilder.writeTimeout(30, TimeUnit.SECONDS);
+      httpBuilder.connectTimeout(TIMEOUT, TimeUnit.SECONDS);
+      httpBuilder.readTimeout(TIMEOUT, TimeUnit.SECONDS);
+      httpBuilder.writeTimeout(TIMEOUT, TimeUnit.SECONDS);
       retrofit = new Retrofit.Builder()
           .client(httpBuilder.build())
           .baseUrl(BASE_URL)
@@ -42,7 +30,7 @@ public class CompRoot {
     return retrofit;
   }
 
-  public NewsListingApi getNewsListingApi() {
+  NewsListingApi getNewsListingApi() {
     return getRetrofit().create(NewsListingApi.class);
   }
 }

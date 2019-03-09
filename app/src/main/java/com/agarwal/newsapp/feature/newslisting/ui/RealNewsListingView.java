@@ -1,5 +1,6 @@
 package com.agarwal.newsapp.feature.newslisting.ui;
 
+import android.annotation.SuppressLint;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.InputType;
@@ -39,8 +40,9 @@ public class RealNewsListingView extends BaseObservableView<NewsListingView.List
 
   @BindView(R.id.tv_error)
   AppCompatTextView tvError;
-  public static final long DELAY = 300;
+  private static final long DELAY = 300;
 
+  @SuppressLint("InflateParams")
   public RealNewsListingView(LayoutInflater inflater) {
     setRootView(inflater.inflate(R.layout.activity_news_listing, null, false));
     initViews();

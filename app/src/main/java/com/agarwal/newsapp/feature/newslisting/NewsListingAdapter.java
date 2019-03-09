@@ -38,7 +38,7 @@ public class NewsListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
   }
 
   @Override
-  public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+  public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
     ViewHolderNews ViewHolderNews = (ViewHolderNews) holder;
     Articles articles = newsList.get(position);
     ViewHolderNews.tvAuthor.setText(articles.getAuthor());
@@ -51,9 +51,9 @@ public class NewsListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 .error(R.drawable.ic_launcher_background))
         .load(articles.getUrlToImage())
         .into(ViewHolderNews.ivNews);
-    ViewHolderNews.itemView.setOnClickListener(view -> {
-      newsListingInteraction.onClick(articles.getUrl(), articles.getSource().getName());
-    });
+    ViewHolderNews.itemView.setOnClickListener(
+        view -> newsListingInteraction.onClick(articles.getUrl())
+    );
   }
 
   @Override
@@ -87,6 +87,6 @@ public class NewsListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
   }
 
   public interface NewsListingInteraction {
-    void onClick(String url, String title);
+    void onClick(String url);
   }
 }

@@ -43,7 +43,7 @@ public class CompRootUi {
     return new ViewFactory(getLayoutInflater());
   }
 
-  public NewsListingApi getNewsListingApi() {
+  private NewsListingApi getNewsListingApi() {
     return compRoot.getNewsListingApi();
   }
 
