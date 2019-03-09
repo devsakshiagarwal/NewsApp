@@ -1,11 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorf8"
+    android:orientation="vertical"
     tools:context="com.agarwal.newsapp.feature.newslisting.NewsListingActivity"
     >
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+  <include
+      layout="@layout/layout_toolbar_search"/>
+
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/rv_news_list"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="@dimen/margin_8"
+      />
+
+</LinearLayout>

@@ -1,8 +1,11 @@
 package com.agarwal.newsapp.common.di;
 
 import android.content.Context;
+import android.view.LayoutInflater;
 import androidx.appcompat.app.AppCompatActivity;
 import com.agarwal.newsapp.common.arch.Router;
+import com.agarwal.newsapp.common.arch.ViewFactory;
+import com.agarwal.newsapp.feature.newslisting.NewsListUseCase;
 import com.agarwal.newsapp.feature.newslisting.network.NewsListingApi;
 
 public class CompRootUi {
@@ -27,7 +30,19 @@ public class CompRootUi {
     return new Router(getActivity());
   }
 
+  private LayoutInflater getLayoutInflater() {
+    return LayoutInflater.from(getContext());
+  }
+
+  public ViewFactory getViewFactory() {
+    return new ViewFactory(getLayoutInflater());
+  }
+
   public NewsListingApi getNewsListingApi() {
     return compRoot.getNewsListingApi();
+  }
+
+  public NewsListUseCase getNewsListUseCase() {
+    return new NewsListUseCase(getNewsListingApi());
   }
 }

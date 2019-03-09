@@ -1,6 +1,8 @@
 package com.agarwal.newsapp.feature.newslisting;
 
 import com.agarwal.newsapp.Configuration;
+import com.agarwal.newsapp.common.arch.BaseObservable;
+import com.agarwal.newsapp.feature.newslisting.network.Articles;
 import com.agarwal.newsapp.feature.newslisting.network.NewsListSchema;
 import com.agarwal.newsapp.feature.newslisting.network.NewsListingApi;
 import java.util.HashMap;
@@ -9,27 +11,25 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NewsListUseCase {
+public class NewsListUseCase extends BaseObservable<NewsListUseCase.Listener> {
 
   private final NewsListingApi newsListingApi;
-  private final Listener listener;
   private static final String QUERY = "q";
   private static final String API_KEY = "apiKey";
 
-  public NewsListUseCase(NewsListingApi newsListingApi, Listener listener) {
+  public NewsListUseCase(NewsListingApi newsListingApi) {
     this.newsListingApi = newsListingApi;
-    this.listener = listener;
   }
 
   public void fetchEverything(String query) {
     newsListingApi.getNewsList(getQueryMap(query)).enqueue(new Callback<NewsListSchema>() {
       @Override
       public void onResponse(Call<NewsListSchema> call, Response<NewsListSchema> response) {
-        listener.onSuccess(response.body().getArticles());
+        onSuccess(response.body().getArticles());
       }
 
       @Override public void onFailure(Call<NewsListSchema> call, Throwable t) {
-        listener.onFail(t.getMessage());
+        onFail(t.getMessage());
       }
     });
   }
@@ -38,11 +38,11 @@ public class NewsListUseCase {
     newsListingApi.getHeadLines(getQueryMap(query)).enqueue(new Callback<NewsListSchema>() {
       @Override
       public void onResponse(Call<NewsListSchema> call, Response<NewsListSchema> response) {
-        listener.onSuccess(response.body().getArticles());
+        onSuccess(response.body().getArticles());
       }
 
       @Override public void onFailure(Call<NewsListSchema> call, Throwable t) {
-        listener.onFail(t.getMessage());
+        onFail(t.getMessage());
       }
     });
   }
@@ -54,8 +54,20 @@ public class NewsListUseCase {
     return queryMap;
   }
 
-  interface Listener {
-    void onSuccess(List<NewsListSchema.Articles> newsArticles);
+  private void onSuccess(List<Articles> newsList) {
+    for (Listener listener : getListeners()) {
+      listener.onSuccess(newsList);
+    }
+  }
+
+  private void onFail(String message) {
+    for (Listener listener : getListeners()) {
+      listener.onFail(message);
+    }
+  }
+
+  public interface Listener {
+    void onSuccess(List<Articles> newsArticles);
 
     void onFail(String message);
   }
