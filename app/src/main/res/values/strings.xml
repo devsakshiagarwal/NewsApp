@@ -1,5 +1,5 @@
 <resources>
   <string name="app_name">News App</string>
   <string name="search_hint">Got a news topic to search?</string>
-
+  <string name="no_data">Oops! Something went wrong..</string>
 </resources>

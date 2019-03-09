@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class RealNewsListingViews extends BaseObservableView<NewsListingView.Listener>
+public class RealNewsListingView extends BaseObservableView<NewsListingView.Listener>
     implements NewsListingView {
 
   private NewsListingAdapter newsListingAdapter;
@@ -41,7 +41,7 @@ public class RealNewsListingViews extends BaseObservableView<NewsListingView.Lis
   AppCompatTextView tvError;
   public static final long DELAY = 300;
 
-  public RealNewsListingViews(LayoutInflater inflater) {
+  public RealNewsListingView(LayoutInflater inflater) {
     setRootView(inflater.inflate(R.layout.activity_news_listing, null, false));
     initViews();
   }
@@ -101,11 +101,12 @@ public class RealNewsListingViews extends BaseObservableView<NewsListingView.Lis
     if (newsList != null && !newsList.isEmpty()) {
       setUpViews(newsList);
     } else {
-      showError();
+      showError(getContext().getString(R.string.no_data));
     }
   }
 
-  private void showError() {
+  private void showError(String message) {
+    tvError.setText(message);
     tvError.setVisibility(View.VISIBLE);
   }
 
@@ -116,8 +117,8 @@ public class RealNewsListingViews extends BaseObservableView<NewsListingView.Lis
   }
 
   @Override
-  public void showZeroState() {
-    showError();
+  public void showZeroState(String message) {
+    showError(message);
   }
 
   @Override

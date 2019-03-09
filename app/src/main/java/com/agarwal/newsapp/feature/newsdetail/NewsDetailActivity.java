@@ -1,22 +1,42 @@
 package com.agarwal.newsapp.feature.newsdetail;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import com.agarwal.newsapp.R;
+import androidx.annotation.Nullable;
+import com.agarwal.newsapp.common.ui.BaseActivity;
+import com.agarwal.newsapp.common.util.AppConstants;
+import com.agarwal.newsapp.feature.newsdetail.ui.NewsDetailView;
 
-public class NewsDetailActivity extends AppCompatActivity {
+public class NewsDetailActivity extends BaseActivity
+    implements NewsDetailView.Listener {
+
+  private NewsDetailView newsDetailView;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.activity_news_detail);
+    newsDetailView = getCompositionRoot().getViewFactory().getNewsDetailView();
+    setContentView(newsDetailView.getRootView());
   }
 
-  public static Intent getLaunchIntent(Context context) {
+  @Override protected void onStart() {
+    super.onStart();
+    newsDetailView.registerListener(this);
+    newsDetailView.bindNewsDetail(getIntent().getStringExtra(AppConstants.PARAM_URL));
+  }
+
+  @Override protected void onStop() {
+    super.onStop();
+    newsDetailView.unregisterListener(this);
+  }
+
+  public static Intent getLaunchIntent(Activity activity, @Nullable Bundle bundle) {
     Intent intent = new Intent();
-    intent.setClass(context, NewsDetailActivity.class);
+    intent.setClass(activity, NewsDetailActivity.class);
+    if (bundle != null) {
+      intent.putExtras(bundle);
+    }
     return intent;
   }
 }

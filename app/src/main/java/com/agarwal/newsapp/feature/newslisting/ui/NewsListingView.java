@@ -10,11 +10,11 @@ public interface NewsListingView extends ObservableView<NewsListingView.Listener
 
   void hideProgressBar();
 
-  void showZeroState();
+  void showZeroState(String message);
 
   void bindNewsList(List<Articles> newsList);
 
-  public interface Listener {
+  interface Listener {
     void onQueryChange(String query);
   }
 }

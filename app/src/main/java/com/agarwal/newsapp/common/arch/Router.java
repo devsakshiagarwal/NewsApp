@@ -1,6 +1,7 @@
 package com.agarwal.newsapp.common.arch;
 
 import android.app.Activity;
+import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.agarwal.newsapp.feature.newsdetail.NewsDetailActivity;
 
@@ -12,7 +13,7 @@ public class Router {
     this.activity = activity;
   }
 
-  public void toNewsDetailActivity() {
-    activity.startActivity(  NewsDetailActivity.getLaunchIntent(activity));
+  public void toNewsDetailActivity(Bundle bundle) {
+    activity.startActivity(NewsDetailActivity.getLaunchIntent(activity, bundle));
   }
 }

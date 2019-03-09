@@ -2,12 +2,14 @@ package com.agarwal.newsapp.feature.newslisting;
 
 import android.os.Bundle;
 import com.agarwal.newsapp.common.ui.BaseActivity;
+import com.agarwal.newsapp.common.util.AppConstants;
 import com.agarwal.newsapp.feature.newslisting.network.Articles;
 import com.agarwal.newsapp.feature.newslisting.ui.NewsListingView;
 import java.util.List;
 
 public class NewsListingActivity extends BaseActivity
-    implements NewsListUseCase.Listener, NewsListingView.Listener {
+    implements NewsListUseCase.Listener, NewsListingView.Listener,
+    NewsListingAdapter.NewsListingInteraction {
 
   private NewsListUseCase newsListUseCase;
   private NewsListingView newsListingView;
@@ -25,10 +27,6 @@ public class NewsListingActivity extends BaseActivity
     super.onStart();
     newsListingView.registerListener(this);
     newsListUseCase.registerListener(this);
-  }
-
-  @Override protected void onResume() {
-    super.onResume();
     newsListingView.showProgressBar();
     makeApiCall();
   }
@@ -40,7 +38,7 @@ public class NewsListingActivity extends BaseActivity
 
   @Override public void onFail(String message) {
     newsListingView.hideProgressBar();
-    newsListingView.showZeroState();
+    newsListingView.showZeroState(message);
   }
 
   @Override protected void onStop() {
@@ -52,6 +50,12 @@ public class NewsListingActivity extends BaseActivity
   @Override public void onQueryChange(String query) {
     this.query = query;
     makeApiCall();
+  }
+
+  @Override public void onClick(String url, String title) {
+    Bundle bundle = new Bundle();
+    bundle.putString(AppConstants.PARAM_URL, url);
+    getCompositionRoot().getRouter().toNewsDetailActivity(bundle);
   }
 
   void makeApiCall() {

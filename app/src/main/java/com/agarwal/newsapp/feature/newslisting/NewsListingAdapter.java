@@ -20,11 +20,13 @@ import java.util.List;
 public class NewsListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
   private List<Articles> newsList = new ArrayList<>();
+  private final NewsListingInteraction newsListingInteraction;
 
   private final Context context;
 
   public NewsListingAdapter(Context context) {
     this.context = context;
+    newsListingInteraction = (NewsListingInteraction) context;
   }
 
   @NonNull
@@ -49,6 +51,9 @@ public class NewsListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
                 .error(R.drawable.ic_launcher_background))
         .load(articles.getUrlToImage())
         .into(ViewHolderNews.ivNews);
+    ViewHolderNews.itemView.setOnClickListener(view -> {
+      newsListingInteraction.onClick(articles.getUrl(), articles.getSource().getName());
+    });
   }
 
   @Override
@@ -79,5 +84,9 @@ public class NewsListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
       super(view);
       ButterKnife.bind(this, view);
     }
+  }
+
+  public interface NewsListingInteraction {
+    void onClick(String url, String title);
   }
 }
