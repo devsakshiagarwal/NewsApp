@@ -11,7 +11,7 @@ public final class ConnectivityDetector {
     this.context = context;
   }
 
-  private boolean isConnected() {
+  public boolean isConnected() {
     ConnectivityManager cm =
         (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
     return cm.getActiveNetworkInfo() != null;

@@ -1,6 +1,7 @@
 package com.agarwal.newsapp.feature.newslisting;
 
 import android.os.Bundle;
+import com.agarwal.newsapp.R;
 import com.agarwal.newsapp.common.ui.BaseActivity;
 import com.agarwal.newsapp.common.util.AppConstants;
 import com.agarwal.newsapp.feature.newslisting.network.Articles;
@@ -59,6 +60,10 @@ public class NewsListingActivity extends BaseActivity
   }
 
   void makeApiCall() {
-    newsListUseCase.fetchEverything(query);
+    if (getCompositionRoot().getConnectivityDetector().isConnected()) {
+      newsListUseCase.fetchEverything(query);
+    } else {
+      onFail(getString(R.string.no_internet));
+    }
   }
 }

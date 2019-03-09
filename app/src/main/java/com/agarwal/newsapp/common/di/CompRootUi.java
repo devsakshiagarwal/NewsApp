@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import androidx.appcompat.app.AppCompatActivity;
 import com.agarwal.newsapp.common.arch.Router;
 import com.agarwal.newsapp.common.arch.ViewFactory;
+import com.agarwal.newsapp.common.connectivity.ConnectivityDetector;
 import com.agarwal.newsapp.feature.newslisting.NewsListUseCase;
 import com.agarwal.newsapp.feature.newslisting.network.NewsListingApi;
 
@@ -28,6 +29,10 @@ public class CompRootUi {
 
   public Router getRouter() {
     return new Router(getActivity());
+  }
+
+  public ConnectivityDetector getConnectivityDetector() {
+    return new ConnectivityDetector(activity);
   }
 
   private LayoutInflater getLayoutInflater() {
