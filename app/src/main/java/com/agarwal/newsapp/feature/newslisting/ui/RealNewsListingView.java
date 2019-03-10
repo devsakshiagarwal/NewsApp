@@ -21,6 +21,10 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * View Implementation for NewsListingActivity
+ * Responsible only for view rendering
+ */
 public class RealNewsListingView extends BaseObservableView<NewsListingView.Listener>
     implements NewsListingView {
 
@@ -48,6 +52,9 @@ public class RealNewsListingView extends BaseObservableView<NewsListingView.List
     initViews();
   }
 
+  /**
+   * initiates empty views in the activity
+   */
   private void initViews() {
     setUpSearchView();
     newsListingAdapter = new NewsListingAdapter(getContext());
@@ -56,11 +63,20 @@ public class RealNewsListingView extends BaseObservableView<NewsListingView.List
     rvNewsList.requestFocus();
   }
 
+  /**
+   * sets up views with the data
+   *
+   * @param newsList list for setting up the RecyclerView with the list of articles
+   */
   private void setUpViews(List<Articles> newsList) {
     tvError.setVisibility(View.GONE);
     newsListingAdapter.setNewsList(newsList);
   }
 
+  /**
+   * search view in the toolbar for handling the queries
+   * handles the delay of 300ms between api calls when user starts typing
+   */
   private void setUpSearchView() {
     searchCloseBtn.setVisibility(View.GONE);
     searchView.setInputType(InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
@@ -107,11 +123,21 @@ public class RealNewsListingView extends BaseObservableView<NewsListingView.List
     }
   }
 
+  /**
+   * shows error in case of api failure or no internet
+   *
+   * @param message relevant message string
+   */
   private void showError(String message) {
     tvError.setText(message);
     tvError.setVisibility(View.VISIBLE);
   }
 
+  /**
+   * method get called when string in SearchView changes
+   *
+   * @param query searchString
+   */
   private void onQueryChange(String query) {
     for (Listener listener : getListeners()) {
       listener.onQueryChange(query);

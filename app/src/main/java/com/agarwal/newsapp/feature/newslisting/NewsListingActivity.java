@@ -22,10 +22,6 @@ public class NewsListingActivity extends BaseActivity
     newsListingView = getCompositionRoot().getViewFactory().getNewsListView();
     newsListUseCase = getCompositionRoot().getNewsListUseCase();
     setContentView(newsListingView.getRootView());
-  }
-
-  @Override protected void onStart() {
-    super.onStart();
     newsListingView.registerListener(this);
     newsListUseCase.registerListener(this);
     newsListingView.showProgressBar();
@@ -53,12 +49,15 @@ public class NewsListingActivity extends BaseActivity
     makeApiCall();
   }
 
-  @Override public void onClick(String url) {
+  @Override public void onNewsItemClick(String url) {
     Bundle bundle = new Bundle();
     bundle.putString(AppConstants.PARAM_URL, url);
     getCompositionRoot().getRouter().toNewsDetailActivity(bundle);
   }
 
+  /**
+   * makes an api call for fetching all the news from the server with a query
+   */
   void makeApiCall() {
     if (getCompositionRoot().getConnectivityDetector().isConnected()) {
       newsListUseCase.fetchEverything(query);

@@ -8,6 +8,9 @@ import com.agarwal.newsapp.common.ui.BaseActivity;
 import com.agarwal.newsapp.common.util.AppConstants;
 import com.agarwal.newsapp.feature.newsdetail.ui.NewsDetailView;
 
+/**
+ * Activity that is responsible for rendering the whole news into a WebView
+ */
 public class NewsDetailActivity extends BaseActivity
     implements NewsDetailView.Listener {
 
@@ -31,6 +34,13 @@ public class NewsDetailActivity extends BaseActivity
     newsDetailView.unregisterListener(this);
   }
 
+  /**
+   * launchIntent to launch NewsDetailActivity. Should be called only from router
+   *
+   * @param activity expects activity context where it is being called from
+   * @param bundle arguments that NewsDetailActivity expects: news url for now
+   * @return intent for starting NewsDetailActivity
+   */
   public static Intent getLaunchIntent(Activity activity, @Nullable Bundle bundle) {
     Intent intent = new Intent();
     intent.setClass(activity, NewsDetailActivity.class);

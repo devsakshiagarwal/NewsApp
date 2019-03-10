@@ -17,6 +17,11 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Adapter for setting up list of articles into the item_news ui card items
+ * needs context from the activity or from the fragment.
+ * NewsListingInteraction should be implemented in the class, this adapter is being called from
+ */
 public class NewsListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
   private List<Articles> newsList = new ArrayList<>();
@@ -52,7 +57,7 @@ public class NewsListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         .load(articles.getUrlToImage())
         .into(ViewHolderNews.ivNews);
     ViewHolderNews.itemView.setOnClickListener(
-        view -> newsListingInteraction.onClick(articles.getUrl())
+        view -> newsListingInteraction.onNewsItemClick(articles.getUrl())
     );
   }
 
@@ -61,6 +66,9 @@ public class NewsListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     return newsList.size();
   }
 
+  /**
+   * to be called with list of Articles to be set in the adapter
+   */
   public void setNewsList(List<Articles> newsList) {
     this.newsList = newsList;
     notifyDataSetChanged();
@@ -86,7 +94,15 @@ public class NewsListingAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     }
   }
 
+  /**
+   * Interface for interaction between adapter and the class adapter is being called from
+   */
   public interface NewsListingInteraction {
-    void onClick(String url);
+    /**
+     * gives callback when any item is clicked in the list
+     *
+     * @param url needs url to be loaded in the WebView
+     */
+    void onNewsItemClick(String url);
   }
 }

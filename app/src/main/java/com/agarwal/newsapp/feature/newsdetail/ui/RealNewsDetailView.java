@@ -10,6 +10,10 @@ import butterknife.BindView;
 import com.agarwal.newsapp.R;
 import com.agarwal.newsapp.common.arch.BaseObservableView;
 
+/**
+ * Implementation of NewsDetailView which is responsible only for rendering the views of
+ * NewsDetailActivity
+ */
 public class RealNewsDetailView extends BaseObservableView<NewsDetailView.Listener>
     implements NewsDetailView {
 
@@ -22,6 +26,11 @@ public class RealNewsDetailView extends BaseObservableView<NewsDetailView.Listen
     pbNewsDetail.setVisibility(View.VISIBLE);
   }
 
+  /**
+   * sets up the views with the values
+   *
+   * @param url for loading WebView
+   */
   private void setUpViews(String url) {
     wvNewsDetail.loadUrl(url);
     wvNewsDetail.setWebViewClient(new WebViewClient() {

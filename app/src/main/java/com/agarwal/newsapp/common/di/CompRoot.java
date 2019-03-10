@@ -1,13 +1,16 @@
 package com.agarwal.newsapp.common.di;
 
+import com.agarwal.newsapp.Configuration;
 import com.agarwal.newsapp.feature.newslisting.network.NewsListingApi;
 import java.util.concurrent.TimeUnit;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.agarwal.newsapp.Configuration.BASE_URL;
-
+/**
+ * Responsible for all Application level methods which are supposed to be initiated only once when
+ * required.
+ */
 public class CompRoot {
   private Retrofit retrofit;
   private static final int TIMEOUT = 30;
@@ -15,6 +18,11 @@ public class CompRoot {
   public CompRoot() {
   }
 
+  /**
+   * @return retrofit instance for making api calls
+   * connection timeout has been increased to 30 seconds as api is taking a little bit more time in
+   * responding
+   */
   private Retrofit getRetrofit() {
     if (retrofit == null) {
       OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
@@ -23,13 +31,16 @@ public class CompRoot {
       httpBuilder.writeTimeout(TIMEOUT, TimeUnit.SECONDS);
       retrofit = new Retrofit.Builder()
           .client(httpBuilder.build())
-          .baseUrl(BASE_URL)
+          .baseUrl(Configuration.BASE_URL)
           .addConverterFactory(GsonConverterFactory.create())
           .build();
     }
     return retrofit;
   }
 
+  /**
+   * @return newsListing api interface
+   */
   NewsListingApi getNewsListingApi() {
     return getRetrofit().create(NewsListingApi.class);
   }

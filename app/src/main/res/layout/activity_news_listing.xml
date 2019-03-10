@@ -1,42 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/colorf8"
-    android:orientation="vertical"
     tools:context="com.agarwal.newsapp.feature.newslisting.NewsListingActivity"
     >
 
   <include
       layout="@layout/layout_toolbar_search"/>
 
-  <ProgressBar
-      android:id="@+id/pb_news"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:layout_margin="@dimen/margin_16"
-      android:visibility="gone"
-      />
-
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/rv_news_list"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      app:layout_constraintTop_toTopOf="parent"
+      android:layout_marginTop="@dimen/height_toolbar"
       />
+
+  <ProgressBar
+      android:id="@+id/pb_news"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:visibility="gone"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      />
+
 
   <androidx.appcompat.widget.AppCompatTextView
       android:id="@+id/tv_error"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_gravity="center"
       android:fontFamily="@font/exo2_semibold"
-      android:textSize="@dimen/text_14"
-      android:textAlignment="center"
-      android:layout_marginTop="@dimen/height_image"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
       android:textColor="@color/color4c"
+      android:textSize="@dimen/text_14"
       />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Observable class for Views: Activities/Fragment
+ * Should be extended inside view implementation
+ */
 public abstract class BaseObservableView<T> extends BaseView
     implements ObservableView<T> {
 
@@ -19,6 +23,9 @@ public abstract class BaseObservableView<T> extends BaseView
     listeners.remove(listener);
   }
 
+  /**
+   * @return all the registered listeners at a particular time
+   */
   protected final Set<T> getListeners() {
     return Collections.unmodifiableSet(listeners);
   }
