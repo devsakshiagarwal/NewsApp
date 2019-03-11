@@ -17,6 +17,7 @@ import com.agarwal.newsapp.R;
 import com.agarwal.newsapp.common.arch.BaseObservableView;
 import com.agarwal.newsapp.feature.newslisting.NewsListingAdapter;
 import com.agarwal.newsapp.feature.newslisting.network.Articles;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -45,6 +46,7 @@ public class RealNewsListingView extends BaseObservableView<NewsListingView.List
   @BindView(R.id.tv_error)
   AppCompatTextView tvError;
   private static final long DELAY = 300;
+  private List<Articles> newsList = new ArrayList<>();
 
   @SuppressLint("InflateParams")
   public RealNewsListingView(LayoutInflater inflater) {
@@ -69,6 +71,7 @@ public class RealNewsListingView extends BaseObservableView<NewsListingView.List
    * @param newsList list for setting up the RecyclerView with the list of articles
    */
   private void setUpViews(List<Articles> newsList) {
+    this.newsList = newsList;
     tvError.setVisibility(View.GONE);
     newsListingAdapter.setNewsList(newsList);
   }
@@ -129,8 +132,10 @@ public class RealNewsListingView extends BaseObservableView<NewsListingView.List
    * @param message relevant message string
    */
   private void showError(String message) {
-    tvError.setText(message);
-    tvError.setVisibility(View.VISIBLE);
+    if (newsList.isEmpty()) {
+      tvError.setText(message);
+      tvError.setVisibility(View.VISIBLE);
+    }
   }
 
   /**

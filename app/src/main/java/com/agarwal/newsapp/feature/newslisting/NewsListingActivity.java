@@ -38,8 +38,8 @@ public class NewsListingActivity extends BaseActivity
     newsListingView.showZeroState(message);
   }
 
-  @Override protected void onStop() {
-    super.onStop();
+  @Override protected void onDestroy() {
+    super.onDestroy();
     newsListingView.unregisterListener(this);
     newsListUseCase.unregisterListener(this);
   }
